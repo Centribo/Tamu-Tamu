@@ -15,7 +15,6 @@ public class MusicController : MonoBehaviour {
 
 	//Public variables
 	public float visualLatency;
-	public float BPM;
 
 	//Private variables
 	AudioSource song;

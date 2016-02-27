@@ -187,7 +187,6 @@ public class NoteManager : MonoBehaviour {
 				while (line != null);
 				// Done reading, close the reader and return true to broadcast success    
 				theReader.Close();
-				Debug.Log("Finished parsing file");
 				//return true;
 			}
 		}
@@ -204,15 +203,11 @@ public class NoteManager : MonoBehaviour {
 
 	public void SpawnNotes(){
 		//If there is a next note, and its within the spawn overhead time (ie, it's time to spawn it)
-		if(loadedNotes.Count > 0 && (loadedNotes.Peek().time - MusicController.Instance.GetSongTime()) <= spawnOverhead){
-			if(true){
-				Note note = loadedNotes.Dequeue();
-				if(note.holdTime == 0){
-					GameObject noteGO = Instantiate(notePrefab, Camera.main.transform.position + Vector3.up*10000, Quaternion.identity) as GameObject;
-					NoteController noteC = noteGO.GetComponent<NoteController>();
-					noteC.SetNote(note);
-				}
-			}
+		if(loadedNotes.Count > 0 && (loadedNotes.Peek().time - MusicController.Instance.GetSongTime()) <= spawnOverhead){			
+			Note note = loadedNotes.Dequeue();
+			GameObject noteGO = Instantiate(notePrefab, Camera.main.transform.position + Vector3.up*10000, Quaternion.identity) as GameObject;
+			NoteController noteC = noteGO.GetComponent<NoteController>();
+			noteC.SetNote(note);
 		}
 	}
 }
