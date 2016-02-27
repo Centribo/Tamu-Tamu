@@ -12,7 +12,7 @@ public class NoteController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		note = new Note();
+		note = new Note (0, 0);
 		note.time = time;
 	}
 	
@@ -35,7 +35,7 @@ public class NoteController : MonoBehaviour {
 	private void CheckHit(){
 		float delta = note.time - MusicController.Instance.GetSongTime();
 		delta = Mathf.Abs(delta);
-		Debug.Log("Checking for note hit! Delta: " + delta);
+		/*Debug.Log("Checking for note hit! Delta: " + delta);
 		if(delta <= PERFECT){
 			Debug.Log("Perfect hit!");
 		} else if(delta <= GOOD){
@@ -44,6 +44,6 @@ public class NoteController : MonoBehaviour {
 			Debug.Log("Bad hit!");
 		} else {
 			Debug.Log("Miss!");
-		}
+		}*/
 	}
 }
