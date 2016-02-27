@@ -33,8 +33,9 @@ public class NoteManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		WWW api = new WWW ("api.openweathermap.org/data/2.5/weather?q=London,uk");
+		
 		loadedNotes = new Queue<Note> ();
-		LoadNotes("Assets/Resources/test.txt");
+		LoadNotes("Assets/Resources/happy.txt");
 		SpawnNotes();
 		Debug.Log ("Starting NOte manager");
 		/*var cli = new WebClient();
@@ -43,7 +44,7 @@ public class NoteManager : MonoBehaviour {
 
 
 		//Debug.Log (api.text);
-		getWeather(RecieveItemCatelog);
+		//getWeather(RecieveItemCatelog);
 	}
 
 	public void getWeather(GetItemCatelogReceiver _GetItemCatelogReceiver){
