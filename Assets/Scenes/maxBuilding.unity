@@ -405,5 +405,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4738cf6b8c6afdf46be3d733b3f5b28c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualLatency: 0.1
-  BPM: 100
+  visualLatency: -0

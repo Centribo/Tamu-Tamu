@@ -28,7 +28,9 @@ public class NoteManager : MonoBehaviour {
 	//Private variables
 	Queue<Note> loadedNotes = new Queue<Note>(); //Queue to hold loaded notes
 
+	// weather related
 	public delegate void GetItemCatelogReceiver(string text);
+	string weatherText = "";
 
 	// Use this for initialization
 	void Start () {
@@ -43,7 +45,7 @@ public class NoteManager : MonoBehaviour {
 
 
 		//Debug.Log (api.text);
-		getWeather(RecieveItemCatelog);
+		//getWeather(RecieveItemCatelog);
 	}
 
 	public void getWeather(GetItemCatelogReceiver _GetItemCatelogReceiver){
@@ -67,7 +69,11 @@ public class NoteManager : MonoBehaviour {
 
 	private void RecieveItemCatelog(string text)
 	{
-		Debug.Log(text);
+		int ind = text.IndexOf ("description") + 15;
+		int endind = text.IndexOf ("icon") - 2;
+		string weather = text.Substring (ind, endind);
+		Debug.Log(ind + ", " + endind);
+		//weatherText = text;
 	}	
 
 	// Update is called once per frame

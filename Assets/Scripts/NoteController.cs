@@ -13,7 +13,7 @@ public class NoteController : MonoBehaviour {
 
 	//Private variables
 	LineRenderer lr;
-	float stretchFactor = 10;
+	float stretchFactor = 7.5f;
 	float holdFactor = 0.8f;
 
 	bool isBeingHeld = false;
