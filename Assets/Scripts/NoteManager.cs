@@ -130,7 +130,7 @@ public class NoteManager : MonoBehaviour {
 						//	DoStuff(entries);
 						if( linecount == 1 ){
 							if( debugging){		Debug.Log("Start time:\t"+line);	}
-							starttime = Convert.ToSingle(line);
+							starttime = Convert.ToSingle(line) + GameManager.Instance.Global_Offset;
 							currentTime = starttime;
 						}
 						else if( linecount == 2 ){

@@ -14,16 +14,30 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	//Static variables
+	public float Global_Offset = 0;
+
 	//Private variables
 	public int score = 0;
 
+	void Awake() {
+		DontDestroyOnLoad(transform.gameObject);
+	}
+
 	// Use this for initialization
 	void Start () {
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		UpdateScoreTextBox(score);
+		Global_Offset += Input.GetAxis("Horizontal")*0.0001f;
+		UpdateTextBox("GlobalOffsetTextBox", "Offset: " + Global_Offset);
+
+		if(Input.GetButtonDown("Jump")){
+			Application.LoadLevel("adamBuilding");
+		}
 	}
 
 	public void UpdateScoreTextBox(int score){

@@ -70,7 +70,7 @@ public class NoteController : MonoBehaviour {
 
 	private void UpdatePosition(){
 		if(note != null){
-			float y = StrumBarController.Instance.gameObject.transform.position.y - stretchFactor*(MusicController.Instance.GetSongTime() - note.time) + MusicController.Instance.visualLatency;
+			float y = StrumBarController.Instance.gameObject.transform.position.y - stretchFactor*(MusicController.Instance.GetSongTime() - note.time);
 			transform.position = new Vector2(0, y);	
 		}
 	}
@@ -78,7 +78,7 @@ public class NoteController : MonoBehaviour {
 	private void UpdateVisuals(){
 		if(note.holdTime != 0){
 			lr.SetPosition(0, transform.position);
-			float y = StrumBarController.Instance.gameObject.transform.position.y - stretchFactor*(MusicController.Instance.GetSongTime() - note.time - (note.holdTime*holdFactor)) + MusicController.Instance.visualLatency;
+			float y = StrumBarController.Instance.gameObject.transform.position.y - stretchFactor*(MusicController.Instance.GetSongTime() - note.time - (note.holdTime*holdFactor));
 			lr.SetPosition(1, new Vector3(0, y, 0));
 			
 			if(!isHit && !isBeingHeld){
