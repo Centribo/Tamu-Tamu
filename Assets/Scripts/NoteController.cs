@@ -8,12 +8,9 @@ public class NoteController : MonoBehaviour {
 	const float BAD = 0.1f;
 
 	public Note note;
-	public float time;
 
 	// Use this for initialization
 	void Start () {
-		note = new Note();
-		note.time = time;
 	}
 	
 	// Update is called once per frame
@@ -21,29 +18,33 @@ public class NoteController : MonoBehaviour {
 		//Debug.Log(MusicController.Instance.GetSongTime());
 		
 		UpdatePosition();
-		CheckHit();
 		if(Input.GetButtonDown("Fire2")){
 			CheckHit();
 		}
 	}
 
+	public void SetNote(Note n){
+		note = n;
+	}
+
 	private void UpdatePosition(){
-		float y = StrumBarController.Instance.gameObject.transform.position.y - 3*(MusicController.Instance.GetSongTime() - note.time) + MusicController.Instance.visualLatency;
-		transform.position = new Vector2(0, y);
+		if(note != null){
+			float y = StrumBarController.Instance.gameObject.transform.position.y - 5*(MusicController.Instance.GetSongTime() - note.time) + MusicController.Instance.visualLatency;
+			transform.position = new Vector2(0, y);	
+		}
 	}
 
 	private void CheckHit(){
 		float delta = note.time - MusicController.Instance.GetSongTime();
 		delta = Mathf.Abs(delta);
-		Debug.Log("Checking for note hit! Delta: " + delta);
 		if(delta <= PERFECT){
-			Debug.Log("Perfect hit!");
+			GetComponent<SpriteRenderer>().color = Color.green;
 		} else if(delta <= GOOD){
-			Debug.Log("Good hit!");
+			GetComponent<SpriteRenderer>().color = Color.yellow;
 		} else if(delta <= BAD){
-			Debug.Log("Bad hit!");
+			GetComponent<SpriteRenderer>().color = Color.red;
 		} else {
-			Debug.Log("Miss!");
+			GetComponent<SpriteRenderer>().color = Color.black;
 		}
 	}
 }
