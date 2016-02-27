@@ -35,8 +35,9 @@ public class NoteManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		WWW api = new WWW ("api.openweathermap.org/data/2.5/weather?q=London,uk");
+		
 		loadedNotes = new Queue<Note> ();
-		LoadNotes("Assets/Resources/test.txt");
+		LoadNotes("Assets/Resources/happy.txt");
 		SpawnNotes();
 		Debug.Log ("Starting NOte manager");
 		/*var cli = new WebClient();
@@ -90,12 +91,22 @@ public class NoteManager : MonoBehaviour {
 		float bpm = 0;
 		float currentTime = 0;
 
+		TextAsset f = Resources.Load ("test") as TextAsset;
+		//Debug.Log (f.text); 
+
 		try
 		{
 			string line;
 			// Create a new StreamReader, tell it which file to read and what encoding the file
 			// was saved as
-			StreamReader theReader = new StreamReader(fileName, Encoding.Default);
+			MemoryStream stream = new MemoryStream();
+			StreamWriter writer = new StreamWriter(stream);
+			writer.Write(f.text);
+			writer.Flush();
+			stream.Position = 0;
+
+			StreamReader theReader = new StreamReader(stream);
+
 			// Immediately clean up the reader after this block of code is done.
 			// You generally use the "using" statement for potentially memory-intensive objects
 			// instead of relying on garbage collection.
