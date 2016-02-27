@@ -6,6 +6,8 @@ using System.Text;
 using System.Linq;
 using System.IO;
 using System;
+using System.Net;
+//using System.Net.WebClient;
 
 public class NoteManager : MonoBehaviour {
 
@@ -26,14 +28,48 @@ public class NoteManager : MonoBehaviour {
 	//Private variables
 	Queue<Note> loadedNotes = new Queue<Note>(); //Queue to hold loaded notes
 
+	public delegate void GetItemCatelogReceiver(string text);
+
 	// Use this for initialization
 	void Start () {
+		WWW api = new WWW ("api.openweathermap.org/data/2.5/weather?q=London,uk");
 		loadedNotes = new Queue<Note> ();
 		LoadNotes("Assets/Resources/test.txt");
 		SpawnNotes();
 		Debug.Log ("Starting NOte manager");
+		/*var cli = new WebClient();
+		string data = cli.DownloadString("api.openweathermap.org/data/2.5/weather?q=London,uk");
+		Debug.Log (data);*/
+
+
+		//Debug.Log (api.text);
+		getWeather(RecieveItemCatelog);
 	}
-	
+
+	public void getWeather(GetItemCatelogReceiver _GetItemCatelogReceiver){
+		
+		//yield return api; 
+
+		//_GetItemCatelogReceiver (api.text);
+
+		StartCoroutine("GetItemCatelogResponse", _GetItemCatelogReceiver);
+
+	}
+
+	IEnumerator GetItemCatelogResponse(GetItemCatelogReceiver _GetItemCatelogReceiver)
+	{
+		WWW api = new WWW ("http://api.openweathermap.org/data/2.5/weather?id=6176823&appid=44db6a862fba0b067b1930da0d769e98");
+		//WWW www = new WWW("http://www.google.com");
+		yield return api; 
+
+		_GetItemCatelogReceiver(api.text);
+	}
+
+	private void RecieveItemCatelog(string text)
+	{
+		Debug.Log(text);
+	}	
+
 	// Update is called once per frame
 	void Update () {
 		SpawnNotes();
@@ -41,7 +77,7 @@ public class NoteManager : MonoBehaviour {
 
 	public void LoadNotes(string fileName){
 
-		bool debugging = true;
+		bool debugging = false;
 		int linecount = 1;
 		float interval = 0;
 		float starttime = 0;
