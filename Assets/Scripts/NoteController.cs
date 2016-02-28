@@ -97,27 +97,40 @@ public class NoteController : MonoBehaviour {
 		if(!isHit && !isMissed){
 			float delta = note.time - MusicController.Instance.GetSongTime();
 
+			//if (EffectManager.Instance != null) {
+			//EffectManager.Instance.moveBG ();
+			//Debug.Log ("hit a note");
+			//}
+
 			if(delta <= PERFECT && delta >= -PERFECT){
 				GetComponent<SpriteRenderer>().color = Color.green;
 				GameManager.Instance.score += 100;
 				isHit = true;
 				isMissed = false;
+				EffectManager.Instance.moveBG ();
+
 			} else if(delta <= GOOD && delta >= -GOOD){
 				GetComponent<SpriteRenderer>().color = Color.yellow;
 				GameManager.Instance.score += 50;
 				isHit = true;
 				isMissed = false;
+				EffectManager.Instance.moveBG ();
+
 			} else if(delta <= BAD && delta >= -BAD){
 				GetComponent<SpriteRenderer>().color = Color.red;
 				GameManager.Instance.score += 10;
 				isHit = true;
 				isMissed = false;
+				EffectManager.Instance.moveBG ();
+
 			} else if(delta <= MISS && delta >= -MISS){
 				GetComponent<SpriteRenderer>().color = Color.black;
 				lr.SetColors(Color.black, Color.black);
 				GameManager.Instance.score += 0;
 				isHit = false;
 				isMissed = true;
+				EffectManager.Instance.moveBG ();
+
 			} else {
 				GetComponent<SpriteRenderer>().color = Color.white;
 			}

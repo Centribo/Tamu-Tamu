@@ -19,6 +19,7 @@ public class MusicController : MonoBehaviour {
 	float songTime;
 	float lastReportedPlayheadPosition;
 	bool isPlaying = false;
+	//public float interval;
 
 	//Use this for getting references to our components
 	void Awake(){
@@ -39,10 +40,11 @@ public class MusicController : MonoBehaviour {
 		if(isPlaying){
 			songTime += Time.time - previousFrameTime;
 			previousFrameTime = Time.time;
-			if(song.time != lastReportedPlayheadPosition){
-				songTime = (songTime + song.time)/2;
-				lastReportedPlayheadPosition = song.time;
-			}	
+			//if(song.time != lastReportedPlayheadPosition){
+			//	songTime = (songTime + song.time)/2;
+			//	lastReportedPlayheadPosition = song.time;
+			//}
+			//if( Convert.ToInt32(songTime*1000) % Convert.ToInt32() < 10 )
 		}
 	}
 

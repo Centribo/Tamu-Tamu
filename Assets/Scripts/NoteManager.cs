@@ -136,6 +136,7 @@ public class NoteManager : MonoBehaviour {
 							if( debugging ){	Debug.Log("BPM:\t\t"+ line);	}
 							bpm = Convert.ToSingle(line);
 							interval = 60/bpm;
+							//MusicController.Instance.interval = interval;
 							if(debugging){ Debug.Log("note every " + interval + "s"); }
 						}
 						else{

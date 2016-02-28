@@ -38,9 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Background
     uniqueID: 895253517
+    locked: 0
+  - name: Drum on top
+    uniqueID: 3804812787
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
