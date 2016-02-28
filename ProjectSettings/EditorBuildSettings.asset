@@ -8,8 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
   - enabled: 1
-    path: Assets/Scenes/adamBuilding.unity
-  - enabled: 1
     path: Assets/Scenes/PlayingScene.unity
   - enabled: 1
     path: Assets/Scenes/CalibrationScene.unity
+  - enabled: 1
+    path: Assets/Scenes/SongSelectScene.unity

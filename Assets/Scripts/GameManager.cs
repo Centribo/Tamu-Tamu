@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour {
 	public void PlayLevel(string levelName){
 		SceneManager.LoadScene(levelName);
 
+		state = States.PlayingSong;
+
 		Invoke ("LoadNotes", 1);
 	}
 
@@ -69,7 +71,13 @@ public class GameManager : MonoBehaviour {
 		this.songFileName = songFileName;
 		this.notesFileName = notesFileName;
 	
+		state = States.PlayingSong;
+
 		Invoke("LoadData", 1);
+	}
+
+	public void LoadScene(string scene){
+		SceneManager.LoadScene(scene);
 	}
 
 	public void LoadData(){
