@@ -36,12 +36,12 @@ public class NoteController : MonoBehaviour {
 		UpdatePosition();
 		UpdateVisuals();
 		
-		if(Input.GetButtonDown("Fire2")){
+		if(Input.GetButtonDown("Button")){
 			CheckHit();
 		}
 
 		if(isBeingHeld){
-			if(Input.GetButton("Fire2")){
+			if(Input.GetButton("Button")){
 				GameManager.Instance.score += 10;
 				float delta = (note.time + (note.holdTime*holdFactor)) - MusicController.Instance.GetSongTime();
 				if(delta <= 0){

@@ -16,9 +16,11 @@ public class GameManager : MonoBehaviour {
 
 	//Static variables
 	public float Global_Offset = 0;
+	public int score = 0;
+	
 
 	//Private variables
-	public int score = 0;
+	float fontScale = 0.16f;
 
 	void Awake() {
 		DontDestroyOnLoad(transform.gameObject);
@@ -26,7 +28,14 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		int fontSize = Mathf.RoundToInt(Mathf.Min(Screen.width, Screen.height) * fontScale);
+		Transform textBox = transform.FindChild("GlobalOffsetTextBox");
+		foreach(Transform child in transform){
+			if(child.GetComponent<Text>() != null){
+				child.GetComponent<Text>().fontSize = fontSize;
+			}
+		}
+		textBox.GetComponent<Text>().fontSize = fontSize;
 	}
 	
 	// Update is called once per frame
@@ -35,7 +44,7 @@ public class GameManager : MonoBehaviour {
 		Global_Offset += Input.GetAxis("Horizontal")*0.0001f;
 		UpdateTextBox("GlobalOffsetTextBox", "Offset: " + Global_Offset);
 
-		if(Input.GetButtonDown("Jump")){
+		if(Input.GetButtonDown("Fire1")){
 			Application.LoadLevel("adamBuilding");
 		}
 	}

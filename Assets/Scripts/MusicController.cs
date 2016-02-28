@@ -31,7 +31,7 @@ public class MusicController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		UpdateSongTime();
-		if(Input.GetButtonUp("Fire1")){
+		if(Input.GetButtonUp("Horizontal")){
 			StartSong();
 		}
 	}
