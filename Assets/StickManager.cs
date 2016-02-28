@@ -19,6 +19,9 @@ public class StickManager : MonoBehaviour {
 	public List<Sprite> stickSprites;
 	int bgAmount = 0;
 
+	public AudioClip snare;
+	AudioSource audio;
+
 	// Use this for initialization
 	void Start () {
 
@@ -36,16 +39,22 @@ public class StickManager : MonoBehaviour {
 
 	void Awake(){
 		stickRenderer = GetComponent<SpriteRenderer>();
+		audio = GetComponent<AudioSource>();
+
 	}
 
 	// swaps the image on the background
 	public void moveBG() {
 
+		audio.PlayOneShot(snare);
 
 		bgAmount++;
 		Debug.Log ("shifting animation" + bgAmount);
 
 		stickRenderer.sprite = stickSprites [bgAmount%2];
+
+		// play the sound
+
 
 	}
 
