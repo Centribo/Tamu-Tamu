@@ -32,7 +32,8 @@ public class MenuManager : MonoBehaviour {
 			switch(menuOptions[menuOption]){
 				case "Play Game":
 					GameManager.Instance.state = GameManager.States.SongSelect;
-					GameManager.Instance.PlayLevel("adamBuilding");
+					//GameManager.Instance.PlayLevel("adamBuilding");
+					GameManager.Instance.PlayLevel("Music/happy", "Notes/happy");
 				break;
 				case "Calibrate":
 					GameManager.Instance.state = GameManager.States.Calibration;

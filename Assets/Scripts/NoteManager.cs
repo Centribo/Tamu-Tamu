@@ -31,7 +31,6 @@ public class NoteManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {	
 		loadedNotes = new Queue<Note>();
-		LoadNotes(notesFileName);
 		SpawnNotes();
 	}
 

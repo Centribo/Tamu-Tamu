@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour {
 
 	//Private variables
 	float fontScale = 0.16f;
+	string songFileName;
+	string notesFileName;
 
 	void Awake() {
 		DontDestroyOnLoad(transform.gameObject);
@@ -51,6 +53,20 @@ public class GameManager : MonoBehaviour {
 	public void PlayLevel(string levelName){
 		SceneManager.LoadScene(levelName);
 
+	}
+
+	public void PlayLevel(string songFileName, string notesFileName){
+		SceneManager.LoadScene("PlayingScene");
+
+		this.songFileName = songFileName;
+		this.notesFileName = notesFileName;
+	
+		Invoke("LoadData", 1);
+	}
+
+	public void LoadData(){
+		MusicController.Instance.GetComponent<AudioSource>().clip = Resources.Load(songFileName) as AudioClip;
+		NoteManager.Instance.LoadNotes(notesFileName);
 	}
 
 	public void UpdateScoreTextBox(int score){
