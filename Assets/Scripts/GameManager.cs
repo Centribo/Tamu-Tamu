@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
+using System.IO;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -92,5 +94,51 @@ public class GameManager : MonoBehaviour {
 	public void UpdateTextBox(string textBoxName, string text){
 		Transform textBox = transform.FindChild(textBoxName);
 		textBox.GetComponent<Text>().text = text;
+	}
+
+
+	public bool loadCalibration(){
+		Debug.Log ("Loading calibration");
+		/*try{
+			TextAsset f = Resources.Load(Application.persistentDataPath + "/calib.txt") as TextAsset;
+			MemoryStream stream = new MemoryStream();
+			StreamWriter writer = new StreamWriter(stream);
+			writer.Write(f.text);
+			writer.Flush();
+			stream.Position = 0;
+
+			//Debug.Log("------Successfully Loaded Calibration file");
+
+
+			StreamReader theReader = new StreamReader(stream);
+
+			using (theReader) {
+				string line = theReader.ReadLine();
+				this.Global_Offset = Convert.ToSingle(line);
+			}
+		}
+		catch(Exception e){
+			Debug.Log ("bad calibration check");
+			Debug.Log (e); 	
+		}*/
+		// Read the file and display it line by line.
+		try {
+			System.IO.StreamReader file = 
+			new System.IO.StreamReader(Application.persistentDataPath + "/calib.txt");
+			string line = file.ReadLine ();
+			this.Global_Offset = Convert.ToSingle (line);
+			file.Close();
+		} catch (Exception e) {
+			Debug.Log (e);
+			return false;
+		}
+		return true;
+	}
+
+	public void saveCalibration(){
+		//Debug.Log ("trying to save out calibration");
+		Debug.Log (Application.persistentDataPath + "/calib.txt");
+		System.IO.File.WriteAllText (Application.persistentDataPath + "/calib.txt", Convert.ToString (this.Global_Offset));
+		//System.IO.File.WriteAllText("Assets/Resources/calib.txt", Convert.ToString(this.Global_Offset));
 	}
 }

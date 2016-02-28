@@ -58,7 +58,7 @@ public class NoteManager : MonoBehaviour {
 				}
 				Debug.Log ("Total offset" + GameManager.Instance.Global_Offset);
 			}
-
+			GameManager.Instance.saveCalibration ();
 			GameManager.Instance.PlayLevel ("MainMenu");
 		}
 		//Debug.Log (MusicController.Instance.GetSongTime ());
@@ -77,6 +77,10 @@ public class NoteManager : MonoBehaviour {
 		float starttime = 0;
 		float bpm = 0;
 		float currentTime = 0;
+
+		if (!GameManager.Instance.loadCalibration ()) {
+			GameManager.Instance.Global_Offset = 0;
+		}
 
 		if (CM != null) {
 			if ((float)GameManager.Instance.Offset_Samples > 0) {

@@ -174,8 +174,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 41, y: 36.9}
-  m_SizeDelta: {x: 82, y: 34}
+  m_AnchoredPosition: {x: 65.5, y: 36.899994}
+  m_SizeDelta: {x: 131, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &724602403
 MonoBehaviour:
@@ -206,7 +206,7 @@ MonoBehaviour:
     m_Alignment: 6
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Offset
@@ -461,6 +461,18 @@ Prefab:
     - target: {fileID: 22406344, guid: 21ebfc96095db9c49b26ab75a245a78e, type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22416498, guid: 21ebfc96095db9c49b26ab75a245a78e, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 65.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22416498, guid: 21ebfc96095db9c49b26ab75a245a78e, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 131
+      objectReference: {fileID: 0}
+    - target: {fileID: 11434270, guid: 21ebfc96095db9c49b26ab75a245a78e, type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 21ebfc96095db9c49b26ab75a245a78e, type: 2}
