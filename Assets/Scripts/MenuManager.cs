@@ -26,7 +26,25 @@ public class MenuManager : MonoBehaviour {
 		if(menuCycleTimer >= menuWaitTime){
 			menuCycleTimer = 0;
 			menuOption = (menuOption + 1) % menuOptions.Length;
-			Debug.Log(menuOptions[menuOption]);
+		}
+
+		if(Input.GetButtonDown("Button")){
+			switch(menuOptions[menuOption]){
+				case "Play Game":
+					GameManager.Instance.state = GameManager.States.SongSelect;
+					GameManager.Instance.PlayLevel("adamBuilding");
+				break;
+				case "Calibrate":
+					GameManager.Instance.state = GameManager.States.Calibration;
+				break;
+				case "Credits":
+					GameManager.Instance.state = GameManager.States.Credits;
+				break;
+				case "Exit":
+					Application.Quit();
+					Debug.Log("Attempt to quit in editor");
+				break;
+			}
 		}
 	}
 }

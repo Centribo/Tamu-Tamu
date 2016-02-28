@@ -18,6 +18,7 @@ public class MusicController : MonoBehaviour {
 	float previousFrameTime;
 	float songTime;
 	float lastReportedPlayheadPosition;
+	bool isPlaying = false;
 
 	//Use this for getting references to our components
 	void Awake(){
@@ -26,22 +27,22 @@ public class MusicController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Invoke("StartSong", 3);
 	}
 
 	// Update is called once per frame
 	void Update () {
 		UpdateSongTime();
-		if(Input.GetButtonUp("Horizontal")){
-			StartSong();
-		}
 	}
 
 	private void UpdateSongTime(){
-		songTime += Time.time - previousFrameTime;
-		previousFrameTime = Time.time;
-		if(song.time != lastReportedPlayheadPosition){
-			songTime = (songTime + song.time)/2;
-			lastReportedPlayheadPosition = song.time;
+		if(isPlaying){
+			songTime += Time.time - previousFrameTime;
+			previousFrameTime = Time.time;
+			if(song.time != lastReportedPlayheadPosition){
+				songTime = (songTime + song.time)/2;
+				lastReportedPlayheadPosition = song.time;
+			}	
 		}
 	}
 
@@ -49,6 +50,7 @@ public class MusicController : MonoBehaviour {
 		previousFrameTime = Time.time;
 		lastReportedPlayheadPosition = 0;
 		song.Play();
+		isPlaying = true;
 	}
 
 	public float GetSongTime(){

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -14,10 +15,11 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	//Static variables
+	//Public variables
+	public enum States { MainMenu, SongSelect, Calibration, Credits, PlayingSong, EndScreen };
+	public States state = States.MainMenu;
 	public float Global_Offset = 0;
 	public int score = 0;
-	
 
 	//Private variables
 	float fontScale = 0.16f;
@@ -41,12 +43,14 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		UpdateScoreTextBox(score);
-		Global_Offset += Input.GetAxis("Horizontal")*0.0001f;
+		
+		Global_Offset += Input.GetAxis("Horizontal")*0.001f;
 		UpdateTextBox("GlobalOffsetTextBox", "Offset: " + Global_Offset);
+	}
 
-		if(Input.GetButtonDown("Fire1")){
-			Application.LoadLevel("adamBuilding");
-		}
+	public void PlayLevel(string levelName){
+		SceneManager.LoadScene(levelName);
+
 	}
 
 	public void UpdateScoreTextBox(int score){

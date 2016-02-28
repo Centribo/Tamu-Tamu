@@ -6,8 +6,7 @@ using System.Text;
 using System.Linq;
 using System.IO;
 using System;
-using System.Net;
-//using System.Net.WebClient;
+
 
 public class NoteManager : MonoBehaviour {
 
@@ -23,59 +22,18 @@ public class NoteManager : MonoBehaviour {
 
 	//Public variables
 	public GameObject notePrefab;
+	public string notesFileName;
 	public float spawnOverhead; //How much time, in seconds, between when the notes should be spawned
 
 	//Private variables
 	Queue<Note> loadedNotes = new Queue<Note>(); //Queue to hold loaded notes
 
-	// weather related
-	public delegate void GetItemCatelogReceiver(string text);
-	string weatherText = "";
-
 	// Use this for initialization
-	void Start () {
-		WWW api = new WWW ("api.openweathermap.org/data/2.5/weather?q=London,uk");
-		
-		loadedNotes = new Queue<Note> ();
-		LoadNotes("Assets/Resources/happy.txt");
+	void Start () {	
+		loadedNotes = new Queue<Note>();
+		LoadNotes(notesFileName);
 		SpawnNotes();
-		Debug.Log ("Starting NOte manager");
-		/*var cli = new WebClient();
-		string data = cli.DownloadString("api.openweathermap.org/data/2.5/weather?q=London,uk");
-		Debug.Log (data);*/
-
-
-		//Debug.Log (api.text);
-		//getWeather(RecieveItemCatelog);
 	}
-
-	public void getWeather(GetItemCatelogReceiver _GetItemCatelogReceiver){
-		
-		//yield return api; 
-
-		//_GetItemCatelogReceiver (api.text);
-
-		StartCoroutine("GetItemCatelogResponse", _GetItemCatelogReceiver);
-
-	}
-
-	IEnumerator GetItemCatelogResponse(GetItemCatelogReceiver _GetItemCatelogReceiver)
-	{
-		WWW api = new WWW ("http://api.openweathermap.org/data/2.5/weather?id=6176823&appid=44db6a862fba0b067b1930da0d769e98");
-		//WWW www = new WWW("http://www.google.com");
-		yield return api; 
-
-		_GetItemCatelogReceiver(api.text);
-	}
-
-	private void RecieveItemCatelog(string text)
-	{
-		int ind = text.IndexOf ("description") + 15;
-		int endind = text.IndexOf ("icon") - 2;
-		string weather = text.Substring (ind, endind);
-		Debug.Log(ind + ", " + endind);
-		//weatherText = text;
-	}	
 
 	// Update is called once per frame
 	void Update () {
@@ -91,8 +49,7 @@ public class NoteManager : MonoBehaviour {
 		float bpm = 0;
 		float currentTime = 0;
 
-		TextAsset f = Resources.Load ("test") as TextAsset;
-		//Debug.Log (f.text); 
+		TextAsset f = Resources.Load(fileName) as TextAsset;
 
 		try
 		{

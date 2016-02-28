@@ -31,11 +31,12 @@ public class NoteController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//Debug.Log(MusicController.Instance.GetSongTime());
-		
 		UpdatePosition();
 		UpdateVisuals();
-		
+		CheckInput();
+	}
+
+	private void CheckInput(){
 		if(Input.GetButtonDown("Button")){
 			CheckHit();
 		}
@@ -55,8 +56,6 @@ public class NoteController : MonoBehaviour {
 				isBeingHeld = false;
 			}
 		}
-
-		
 	}
 
 	public void SetNote(Note n){
