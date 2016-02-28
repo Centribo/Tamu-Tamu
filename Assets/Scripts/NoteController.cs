@@ -108,6 +108,7 @@ public class NoteController : MonoBehaviour {
 				isHit = true;
 				isMissed = false;
 				EffectManager.Instance.moveBG ();
+				StickManager.Instance.moveBG ();
 
 			} else if(delta <= GOOD && delta >= -GOOD){
 				GetComponent<SpriteRenderer>().color = Color.yellow;
@@ -115,6 +116,8 @@ public class NoteController : MonoBehaviour {
 				isHit = true;
 				isMissed = false;
 				EffectManager.Instance.moveBG ();
+				StickManager.Instance.moveBG ();
+
 
 			} else if(delta <= BAD && delta >= -BAD){
 				GetComponent<SpriteRenderer>().color = Color.red;
@@ -122,6 +125,8 @@ public class NoteController : MonoBehaviour {
 				isHit = true;
 				isMissed = false;
 				EffectManager.Instance.moveBG ();
+				StickManager.Instance.moveBG ();
+
 
 			} else if(delta <= MISS && delta >= -MISS){
 				GetComponent<SpriteRenderer>().color = Color.black;
@@ -130,6 +135,8 @@ public class NoteController : MonoBehaviour {
 				isHit = false;
 				isMissed = true;
 				EffectManager.Instance.moveBG ();
+				StickManager.Instance.moveBG ();
+
 
 			} else {
 				GetComponent<SpriteRenderer>().color = Color.white;
