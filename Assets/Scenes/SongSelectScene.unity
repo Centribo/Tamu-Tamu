@@ -166,10 +166,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 1261751811}
+  - 114: {fileID: 1261751807}
   - 223: {fileID: 1261751810}
   - 114: {fileID: 1261751809}
   - 114: {fileID: 1261751808}
-  - 114: {fileID: 1261751807}
   m_Layer: 5
   m_Name: SongSelectManager
   m_TagString: Untagged
@@ -190,10 +190,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songChoices:
   - Happy
+  - Magical Night
+  - Too Excited
+  - Victory Gaze
   musicFileNames:
   - music/happy
+  - music/magical_night
+  - music/too_excited
+  - music/victory_gaze
   notesFileNames:
-  - notes/Happy
+  - notes/happy
+  - notes/magical_night
+  - notes/too_excited
+  - notes/victory_gaze
   menuWaitTime: 3
 --- !u!114 &1261751808
 MonoBehaviour:

@@ -40,6 +40,8 @@ public class SongSelectManager : MonoBehaviour {
 	void Update () {
 		UpdateTextBox("SongTextBox", songChoices[menuOption]);
 
+		Debug.Log(menuOption);
+
 		menuCycleTimer += Time.deltaTime;
 		if(menuCycleTimer >= menuWaitTime){
 			menuCycleTimer = 0;
