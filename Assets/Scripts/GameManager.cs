@@ -32,10 +32,15 @@ public class GameManager : MonoBehaviour {
 
 	void Awake() {
 		DontDestroyOnLoad(transform.gameObject);
+
 	}
 
 	// Use this for initialization
 	void Start () {
+		if (FindObjectsOfType(GetType()).Length > 1){
+			Destroy(gameObject);
+		}
+
 		int fontSize = Mathf.RoundToInt(Mathf.Min(Screen.width, Screen.height) * fontScale);
 		Transform textBox = transform.FindChild("GlobalOffsetTextBox");
 		foreach(Transform child in transform){
@@ -52,6 +57,11 @@ public class GameManager : MonoBehaviour {
 		
 		Global_Offset += Input.GetAxis("Horizontal")*0.001f;
 		UpdateTextBox("GlobalOffsetTextBox", "Offset: " + Global_Offset);
+
+		if(state == States.Credits && Input.GetButtonDown("Button")){
+			state = States.MainMenu;
+			LoadScene("MainMenu");
+		}
 	}
 
 	public void PlayLevel(string levelName){

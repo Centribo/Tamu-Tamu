@@ -57,6 +57,7 @@ public class MenuManager : MonoBehaviour {
 				break;
 				case "Credits":
 					GameManager.Instance.state = GameManager.States.Credits;
+					GameManager.Instance.LoadScene("CreditsScene");
 				break;
 				case "Exit":
 					Application.Quit();
