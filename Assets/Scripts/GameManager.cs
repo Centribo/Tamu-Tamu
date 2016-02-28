@@ -19,10 +19,12 @@ public class GameManager : MonoBehaviour {
 	public enum States { MainMenu, SongSelect, Calibration, Credits, PlayingSong, EndScreen };
 	public States state = States.MainMenu;
 	public float Global_Offset = 0;
+	public float Total_Offset = 0;
+	public int Offset_Samples = 0;
 	public int score = 0;
 
 	//Private variables
-	float fontScale = 0.16f;
+	float fontScale = 0.12f;
 	string songFileName;
 	string notesFileName;
 
@@ -53,6 +55,12 @@ public class GameManager : MonoBehaviour {
 	public void PlayLevel(string levelName){
 		SceneManager.LoadScene(levelName);
 
+		Invoke ("LoadNotes", 1);
+	}
+
+	public void LoadNotes(){
+		//Forces NoteManager to LoadNotes. Usually used after level loading with a call by Invoke()
+		NoteManager.Instance.LoadNotes();
 	}
 
 	public void PlayLevel(string songFileName, string notesFileName){

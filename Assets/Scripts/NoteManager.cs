@@ -27,16 +27,46 @@ public class NoteManager : MonoBehaviour {
 
 	//Private variables
 	Queue<Note> loadedNotes = new Queue<Note>(); //Queue to hold loaded notes
+	CalibrationManager CM;
+
+	float endTime = 1000000.0f;
 
 	// Use this for initialization
 	void Start () {	
+		CM = FindObjectOfType<CalibrationManager> ();
+
 		loadedNotes = new Queue<Note>();
 		SpawnNotes();
 	}
 
 	// Update is called once per frame
 	void Update () {
+
+		//Debug.Log ("music: " + MusicController.Instance.GetSongTime() + " song: " + endTime);
+
+		// perform all the cleaning up after a song is played
+		if (MusicController.Instance.GetSongTime () > endTime) {
+
+			//Debug.Log ("music: " + MusicController.Instance.GetSongTime() + " song: " + endTime);
+			Debug.Log ("===========finished song=============");
+			// update the game manager offset
+			if (CM != null) {
+				if ((float)GameManager.Instance.Offset_Samples > 0) {
+					GameManager.Instance.Global_Offset = GameManager.Instance.Total_Offset / (float)GameManager.Instance.Offset_Samples;
+				} else {
+					GameManager.Instance.Global_Offset = 0;
+				}
+				Debug.Log ("Total offset" + GameManager.Instance.Global_Offset);
+			}
+
+			GameManager.Instance.PlayLevel ("MainMenu");
+		}
+		//Debug.Log (MusicController.Instance.GetSongTime ());
 		SpawnNotes();
+	}
+
+	public void LoadNotes(){
+		LoadNotes (notesFileName);
 	}
 
 	public void LoadNotes(string fileName){
@@ -48,6 +78,15 @@ public class NoteManager : MonoBehaviour {
 		float bpm = 0;
 		float currentTime = 0;
 
+		if (CM != null) {
+			if ((float)GameManager.Instance.Offset_Samples > 0) {
+				GameManager.Instance.Global_Offset = GameManager.Instance.Total_Offset / (float)GameManager.Instance.Offset_Samples;
+			} else {
+				GameManager.Instance.Global_Offset = 0;
+			}
+			Debug.Log ("Total offset" + GameManager.Instance.Global_Offset);
+		}
+		
 		TextAsset f = Resources.Load(fileName) as TextAsset;
 
 		try
@@ -152,7 +191,6 @@ public class NoteManager : MonoBehaviour {
 								loadedNotes.Enqueue(new Note(currentTime,interval*4.0f));
 								currentTime += interval*4.0f;
 							}
-
 						}
 					}
 					linecount ++;
@@ -162,6 +200,7 @@ public class NoteManager : MonoBehaviour {
 				theReader.Close();
 				//return true;
 			}
+			endTime = currentTime + interval*8.0f;
 		}
 		// If anything broke in the try block, we throw an exception with information
 		// on what didn't work
@@ -171,7 +210,7 @@ public class NoteManager : MonoBehaviour {
 			Debug.Log(e.Message);
 			//return false;
 		}
-
+		
 	}
 
 	public void SpawnNotes(){

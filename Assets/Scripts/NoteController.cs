@@ -15,6 +15,7 @@ public class NoteController : MonoBehaviour {
 	LineRenderer lr;
 	float stretchFactor = 7.5f;
 	float holdFactor = 0.8f;
+	CalibrationManager CM;
 
 	bool isBeingHeld = false;
 	bool isMissed = false;
@@ -27,6 +28,7 @@ public class NoteController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		CM = FindObjectOfType<CalibrationManager> ();
 	}
 	
 	// Update is called once per frame
@@ -94,24 +96,23 @@ public class NoteController : MonoBehaviour {
 	private void CheckHit(){
 		if(!isHit && !isMissed){
 			float delta = note.time - MusicController.Instance.GetSongTime();
-			delta = Mathf.Abs(delta);
-			
-			if(delta <= PERFECT){
+
+			if(delta <= PERFECT && delta >= -PERFECT){
 				GetComponent<SpriteRenderer>().color = Color.green;
 				GameManager.Instance.score += 100;
 				isHit = true;
 				isMissed = false;
-			} else if(delta <= GOOD){
+			} else if(delta <= GOOD && delta >= -GOOD){
 				GetComponent<SpriteRenderer>().color = Color.yellow;
 				GameManager.Instance.score += 50;
 				isHit = true;
 				isMissed = false;
-			} else if(delta <= BAD){
+			} else if(delta <= BAD && delta >= -BAD){
 				GetComponent<SpriteRenderer>().color = Color.red;
 				GameManager.Instance.score += 10;
 				isHit = true;
 				isMissed = false;
-			} else if(delta <= MISS){
+			} else if(delta <= MISS && delta >= -MISS){
 				GetComponent<SpriteRenderer>().color = Color.black;
 				lr.SetColors(Color.black, Color.black);
 				GameManager.Instance.score += 0;
@@ -119,6 +120,10 @@ public class NoteController : MonoBehaviour {
 				isMissed = true;
 			} else {
 				GetComponent<SpriteRenderer>().color = Color.white;
+			}
+
+			if (isHit && !isMissed && CM != null) {
+				CM.TakeDelta (delta);
 			}
 
 			if(note.holdTime != 0 && isHit && !isMissed){

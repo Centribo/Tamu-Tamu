@@ -22,6 +22,7 @@ public class MenuManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (menuOptions [menuOption]);
 		menuCycleTimer += Time.deltaTime;
 		if(menuCycleTimer >= menuWaitTime){
 			menuCycleTimer = 0;
@@ -37,6 +38,7 @@ public class MenuManager : MonoBehaviour {
 				break;
 				case "Calibrate":
 					GameManager.Instance.state = GameManager.States.Calibration;
+					GameManager.Instance.PlayLevel("CalibrationScene");
 				break;
 				case "Credits":
 					GameManager.Instance.state = GameManager.States.Credits;
