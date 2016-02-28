@@ -511,10 +511,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f7943661b0464c808aa5e14459f58d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stickRenderer: {fileID: 0}
+  stickRenderer: {fileID: 1435813096}
   stickSprites:
-  - {fileID: 21300000, guid: 59c43eba58dd34e7b8a81f51d0965109, type: 3}
-  - {fileID: 21300000, guid: 11ec6969bdb494beab30c57d5da9c935, type: 3}
+  - {fileID: 21300000, guid: e7ec69302ec3eb84d87231e2164f2f4a, type: 3}
+  - {fileID: 21300000, guid: 6feeba6ba386a6b44a7061b56fa97580, type: 3}
   snare: {fileID: 8300000, guid: a43436249699d4914814ddda89033e2b, type: 3}
 --- !u!212 &1435813096
 SpriteRenderer:
@@ -572,7 +572,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   Priority: 128
   DopplerLevel: 1
