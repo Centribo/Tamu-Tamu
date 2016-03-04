@@ -15,3 +15,5 @@ EditorBuildSettings:
     path: Assets/Scenes/SongSelectScene.unity
   - enabled: 1
     path: Assets/Scenes/CreditsScene.unity
+  - enabled: 1
+    path: Assets/Scenes/ScoreScreenScene.unity

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	//Public variables
-	public enum States { MainMenu, SongSelect, Calibration, Credits, PlayingSong, EndScreen };
+	public enum States { MainMenu, SongSelect, Calibration, Credits, PlayingSong, ScoreScreen };
 	public States state = States.MainMenu;
 	public float Global_Offset = 0;
 	public float Total_Offset = 0;
@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log(state);
+
 		UpdateScoreTextBox(score);
 		
 		Global_Offset += Input.GetAxis("Horizontal")*0.001f;
@@ -67,7 +69,9 @@ public class GameManager : MonoBehaviour {
 	public void PlayLevel(string levelName){
 		SceneManager.LoadScene(levelName);
 
-		state = States.PlayingSong;
+		if(state != States.Calibration){
+			state = States.PlayingSong;
+		}
 
 		Invoke ("LoadNotes", 1);
 	}
@@ -83,7 +87,9 @@ public class GameManager : MonoBehaviour {
 		this.songFileName = songFileName;
 		this.notesFileName = notesFileName;
 	
+		
 		state = States.PlayingSong;
+		
 
 		Invoke("LoadData", 1);
 	}
@@ -150,5 +156,10 @@ public class GameManager : MonoBehaviour {
 		Debug.Log (Application.persistentDataPath + "/calib.txt");
 		System.IO.File.WriteAllText (Application.persistentDataPath + "/calib.txt", Convert.ToString (this.Global_Offset));
 		//System.IO.File.WriteAllText("Assets/Resources/calib.txt", Convert.ToString(this.Global_Offset));
+	}
+
+	public void DisplayScoreScreen(){
+		state = States.ScoreScreen;
+		LoadScene("ScoreScreenScene");
 	}
 }

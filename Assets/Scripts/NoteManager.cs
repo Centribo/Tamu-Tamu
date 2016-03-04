@@ -49,17 +49,24 @@ public class NoteManager : MonoBehaviour {
 
 			//Debug.Log ("music: " + MusicController.Instance.GetSongTime() + " song: " + endTime);
 			Debug.Log ("===========finished song=============");
-			// update the game manager offset
-			if (CM != null) {
-				if ((float)GameManager.Instance.Offset_Samples > 0) {
-					GameManager.Instance.Global_Offset = GameManager.Instance.Total_Offset / (float)GameManager.Instance.Offset_Samples;
-				} else {
-					GameManager.Instance.Global_Offset = 0;
+			
+			if(GameManager.Instance.state != GameManager.States.Calibration){
+				//If we finished a level other than the calibration level
+				GameManager.Instance.DisplayScoreScreen();
+				
+			} else {	
+				// update the game manager offset
+				if (CM != null) {
+					if ((float)GameManager.Instance.Offset_Samples > 0) {
+						GameManager.Instance.Global_Offset = GameManager.Instance.Total_Offset / (float)GameManager.Instance.Offset_Samples;
+					} else {
+						GameManager.Instance.Global_Offset = 0;
+					}
+					Debug.Log ("Total offset" + GameManager.Instance.Global_Offset);
 				}
-				Debug.Log ("Total offset" + GameManager.Instance.Global_Offset);
+				GameManager.Instance.saveCalibration ();
+				GameManager.Instance.PlayLevel ("MainMenu");
 			}
-			GameManager.Instance.saveCalibration ();
-			GameManager.Instance.PlayLevel ("MainMenu");
 		}
 		//Debug.Log (MusicController.Instance.GetSongTime ());
 		SpawnNotes();
